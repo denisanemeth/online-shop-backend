@@ -28,7 +28,7 @@ public class Product {
     // Doar dacă negotiable = true; NU se trimite în response către buyer
     private Double minimumPrice;
 
-    @ManyToOne
+    @ManyToOne // mai multe produse - un seller
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 }
