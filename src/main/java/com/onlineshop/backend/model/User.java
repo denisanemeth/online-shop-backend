@@ -2,6 +2,7 @@ package com.onlineshop.backend.model;
 
 import com.onlineshop.backend.enums.Role;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 //adnotări (annotations) și înlocuiesc cod pe care altfel l-ai scrie manual.
 @Entity
@@ -18,6 +19,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
