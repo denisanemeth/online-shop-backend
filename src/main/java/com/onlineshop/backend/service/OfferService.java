@@ -10,6 +10,8 @@ import com.onlineshop.backend.repository.ProductRepository;
 import com.onlineshop.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OfferService {
 
@@ -84,5 +86,10 @@ public class OfferService {
         offer.setStatus(OfferStatus.REJECTED);
         offerRepository.save(offer);
         return "Offer rejected!";
+    }
+    public List<Offer> getOffersForSeller(String sellerEmail) {
+        User seller = userRepository.findByEmail(sellerEmail).orElse(null);
+        if (seller == null) return List.of();
+        return offerRepository.findByProductSeller(seller);
     }
 }
