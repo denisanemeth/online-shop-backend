@@ -38,4 +38,9 @@ public class OfferController {
                               @RequestParam String sellerEmail) {
         return offerService.rejectOffer(id, sellerEmail);
     }
+    @GetMapping("/{productId}/buyer")
+    public Offer getOfferForBuyer(@PathVariable Long productId,
+                                  @RequestParam String buyerEmail) {
+        return offerService.getOfferForBuyer(productId, buyerEmail);
+    }
 }

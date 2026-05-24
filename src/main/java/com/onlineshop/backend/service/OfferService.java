@@ -92,4 +92,9 @@ public class OfferService {
         if (seller == null) return List.of();
         return offerRepository.findByProductSeller(seller);
     }
+
+    public Offer getOfferForBuyer(Long productId, String buyerEmail) {
+        return offerRepository.findByProductIdAndBuyerEmail(productId, buyerEmail)
+                .orElse(null);
+    }
 }
