@@ -3,6 +3,7 @@ package com.onlineshop.backend.controller;
 import com.onlineshop.backend.dto.OfferRequest;
 import com.onlineshop.backend.model.Offer;
 import com.onlineshop.backend.service.OfferService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +40,12 @@ public class OfferController {
         return offerService.rejectOffer(id, sellerEmail);
     }
     @GetMapping("/{productId}/buyer")
-    public Offer getOfferForBuyer(@PathVariable Long productId,
-                                  @RequestParam String buyerEmail) {
-        return offerService.getOfferForBuyer(productId, buyerEmail);
+    public ResponseEntity<Offer> getOfferForBuyer(@PathVariable Long productId,
+                                                  @RequestParam String buyerEmail) {
+        Offer offer = offerService.getOfferForBuyer(productId, buyerEmail);
+        if (offer == null) {
+            return ResponseEntity.ok(null); // returnează null, nu 500
+        }
+        return ResponseEntity.ok(offer);
     }
 }
